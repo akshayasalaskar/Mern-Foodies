@@ -21,24 +21,19 @@ const reducer = (state, action) => {
       let newArr = [...state];
       newArr.splice(action.index, 1);
       return newArr;
+
     case "UPDATE":
       let arr = [...state];
-      arr.find((food, index) => {
-        if (food.id === action.id) {
-          console.log(
-            food.qty,
-            parseInt(action.qty),
-            action.price + food.price
-          );
-          arr[index] = {
-            ...food,
-            qty: parseInt(action.qty) + food.qty,
-            price: action.price + food.price,
+      return arr.map((item) => {
+        if (item.id === action.id) {
+          return {
+            ...item,
+            qty: parseInt(item.qty) + parseInt(action.qty), // Add the new quantity to the existing quantity
+            price: action.price, // Update the price if needed
           };
         }
-        return arr;
+        return item;
       });
-      return arr;
 
     default:
       console.log("Error in Reducer");
