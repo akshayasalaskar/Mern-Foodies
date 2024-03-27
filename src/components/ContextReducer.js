@@ -22,6 +22,10 @@ const reducer = (state, action) => {
       newArr.splice(action.index, 1);
       return newArr;
 
+    case "DROP":
+      let empArray = [];
+      return empArray;
+
     case "UPDATE":
       let arr = [...state];
       return arr.map((item) => {
