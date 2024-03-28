@@ -23,17 +23,17 @@ export default function Card(props) {
     console.log(new Date())
     if (food !== []) {
       if (food.size === size) {
-        await dispatch({ type: "UPDATE", id: props.foodItem._id, price: finalPrice, qty: qty })
+        await dispatch({ type: "UPDATE", id: props.foodItem._id, price: finalPrice, qty: qty, img: props.foodItem.img })
         return
       }
       else if (food.size !== size) {
-        await dispatch({ type: "ADD", id: props.foodItem._id, name: props.foodItem.name, price: finalPrice, qty: qty, size: size, img: props.ImgSrc })
+        await dispatch({ type: "ADD", id: props.foodItem._id, name: props.foodItem.name, price: finalPrice, qty: qty, size: size, img: props.foodItem.img })
         console.log("Size different so simply ADD one more to the list")
         return
       }
       return
     }
-    await dispatch({ type: "ADD", id: props.foodItem._id, name: props.foodItem.name, price: finalPrice, qty: qty, size: size })
+    await dispatch({ type: "ADD", id: props.foodItem._id, name: props.foodItem.name, price: finalPrice, qty: qty, size: size, img: props.foodItem.img })
   }
 
   let finalPrice = qty * parseInt(options[size]);

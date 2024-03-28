@@ -19,7 +19,7 @@ router.post("/orderData", async (req, res) => {
             });
         } catch (error) {
             console.log(error.message);
-            res.send(error)
+            res.send(error.message)
         }
     } else {
         try {
@@ -35,6 +35,33 @@ router.post("/orderData", async (req, res) => {
         }
     }
 });
+
+
+router.post('/myorderData', async (req, res) => {
+    try {
+        console.log(req.body.email)
+        let eId = await Order.findOne({ 'email': req.body.email })
+        //console.log(eId)
+        res.json({ orderData: eId })
+    } catch (error) {
+        res.send("Error", error.message)
+    }
+
+
+});
+
+
+
+
+
+// router.post('/myorderData', async (req, res) => {
+//     try {
+//         let myData = await Order.findOne({ 'email': req.body.email })
+//         res.json({ orderData: myData })
+//     } catch (error) {
+//         res.send('Server Error', error.message)
+//     }
+// })
 
 module.exports = router;
 
