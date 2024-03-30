@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Signup() {
+  const navigate = useNavigate();
   const [credentials, setcredentials] = useState({
     name: "",
     email: "",
@@ -23,8 +24,12 @@ function Signup() {
     });
     const json = await response.json();
     console.log(json);
-    if (!json.success) {
-      alert("Enter valid credentials");
+    if (json.success) {
+      //save the auth toke to local storage and redirect
+      localStorage.setItem("token", json.authToken);
+      navigate("/login");
+    } else {
+      alert("Enter Valid Credentials");
     }
   };
 
