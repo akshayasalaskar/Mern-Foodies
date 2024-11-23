@@ -18,8 +18,8 @@ export default function Login() {
         password: credentials.password,
       }),
     });
-    const json = await response.json();
-    console.log(json);
+    const json = await response.json(); //  response.json() is a method that reads the response body and parses it as JSON.
+
     if (!json.success) {
       alert("Enter valid credentials");
     }

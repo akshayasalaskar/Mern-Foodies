@@ -6,12 +6,11 @@ export default function Card(props) {
   let data = useCart();
   const priceRef = useRef();
   let options = props.options;
-
   let priceOptions = Object.keys(options);
   const [qty, setQty] = useState(1);
   const [size, setSize] = useState("");
   const handleAddToCart = async () => {
-    let food = []
+    let food = [];
     for (const item of data) {
       if (item.id === props.foodItem._id) {
         food = item;
@@ -19,22 +18,42 @@ export default function Card(props) {
         break;
       }
     }
-    console.log(food)
-    console.log(new Date())
+
     if (food !== []) {
       if (food.size === size) {
-        await dispatch({ type: "UPDATE", id: props.foodItem._id, price: finalPrice, qty: qty, img: props.foodItem.img })
-        return
+        await dispatch({
+          type: "UPDATE",
+          id: props.foodItem._id,
+          price: finalPrice,
+          qty: qty,
+          img: props.foodItem.img,
+        });
+        return;
+      } else if (food.size !== size) {
+        await dispatch({
+          type: "ADD",
+          id: props.foodItem._id,
+          name: props.foodItem.name,
+          price: finalPrice,
+          qty: qty,
+          size: size,
+          img: props.foodItem.img,
+        });
+
+        return;
       }
-      else if (food.size !== size) {
-        await dispatch({ type: "ADD", id: props.foodItem._id, name: props.foodItem.name, price: finalPrice, qty: qty, size: size, img: props.foodItem.img })
-        console.log("Size different so simply ADD one more to the list")
-        return
-      }
-      return
+      return;
     }
-    await dispatch({ type: "ADD", id: props.foodItem._id, name: props.foodItem.name, price: finalPrice, qty: qty, size: size, img: props.foodItem.img })
-  }
+    await dispatch({
+      type: "ADD",
+      id: props.foodItem._id,
+      name: props.foodItem.name,
+      price: finalPrice,
+      qty: qty,
+      size: size,
+      img: props.foodItem.img,
+    });
+  };
 
   let finalPrice = qty * parseInt(options[size]);
   useEffect(() => {

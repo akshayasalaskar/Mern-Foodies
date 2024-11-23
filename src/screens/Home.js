@@ -3,6 +3,9 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Card from "../components/Card";
 import Carousel from "../components/Carousel";
+import img1 from "../components/images/mediterranean-cuisine-g4e8d28d38_1280.jpg";
+import img2 from "../components/images/mug-g26f466aae_1280.jpg";
+import img3 from "../components/images/meal-gf36034a51_1280.jpg";
 
 export default function Home() {
   const [search, setSearch] = useState("");
@@ -19,7 +22,6 @@ export default function Home() {
     response = await response.json();
     setFoodItem(response[0]);
     setFoodCat(response[1]);
-    // console.log(response[0], response[1]);
   };
 
   useEffect(() => {
@@ -60,31 +62,19 @@ export default function Home() {
               className="carousel-item active image-wrapper"
               style={{ height: "500px" }}
             >
-              <img
-                src="https://source.unsplash.com/random/600x300?burger"
-                className="d-block w-100 "
-                alt="..."
-              />
+              <img src={img1} className="d-block w-100 " alt="..." />
             </div>
             <div
               className="carousel-item image-wrapper"
               style={{ height: "500px" }}
             >
-              <img
-                src="https://source.unsplash.com/random/600x300?pasta"
-                className="d-block w-100 "
-                alt="..."
-              />
+              <img src={img2} className="d-block w-100 " alt="..." />
             </div>
             <div
               className="carousel-item image-wrapper"
               style={{ height: "500px" }}
             >
-              <img
-                src="https://source.unsplash.com/random/600x300?cake"
-                className="d-block w-100 "
-                alt="..."
-              />
+              <img src={img3} className="d-block w-100 " alt="..." />
             </div>
           </div>
           <button
@@ -149,7 +139,7 @@ export default function Home() {
             );
           })
         ) : (
-          <div>xxxxxxxxxxxxxxx</div>
+          <div>No data found from database</div>
         )}
       </div>
       <div>
